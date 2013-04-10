@@ -17,7 +17,7 @@ using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 using System.IO;
 
-namespace UsingScatterView
+namespace MyScene
 {
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
