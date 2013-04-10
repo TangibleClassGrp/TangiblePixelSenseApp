@@ -1,0 +1,25 @@
+﻿<s:SurfaceWindow x:Class="MyScene.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="MyScene"
+    >
+
+    <s:SurfaceScrollViewer HorizontalScrollBarVisibility="Auto">
+        <s:ScatterView x:Name="scatter" 
+                Height="2000" Width="2000" 
+                BorderBrush="Yellow" BorderThickness="3">
+
+            <s:ScatterView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Image x:Name="img" Source="{Binding}"/>
+                        <s:SurfaceButton Click="OnItemClicked"
+                                     Content="Click Me!"
+                                     Width="100" Height="80"/>
+                    </Grid>
+                </DataTemplate>
+            </s:ScatterView.ItemTemplate>
+        </s:ScatterView>
+    </s:SurfaceScrollViewer>
+</s:SurfaceWindow>
