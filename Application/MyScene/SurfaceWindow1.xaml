@@ -8,9 +8,12 @@
     <s:SurfaceScrollViewer HorizontalScrollBarVisibility="Auto">
         <s:ScatterView x:Name="scatter" 
                 Height="2000" Width="2000" 
-                BorderBrush="Yellow" BorderThickness="3">
-
-            <s:ScatterView.ItemTemplate>
+                BorderBrush="Black" BorderThickness="3">
+            <s:ScatterViewItem CanScale="false" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="Green" BorderThickness="10">
+                <Image x:Name="background" Source="Resources/Images/Backgrounds/Scene 1.jpg" Stretch="Fill" /> <!--CJT may need to modify this a little, simulator makes it look uncentered and too large, but need to check on actual table -->
+                
+            </s:ScatterViewItem>
+          <!--  <s:ScatterView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Image x:Name="img" Source="{Binding}"/>
@@ -19,7 +22,7 @@
                                      Width="100" Height="80"/>
                     </Grid>
                 </DataTemplate>
-            </s:ScatterView.ItemTemplate>
+            </s:ScatterView.ItemTemplate> -->
         </s:ScatterView>
     </s:SurfaceScrollViewer>
 </s:SurfaceWindow>

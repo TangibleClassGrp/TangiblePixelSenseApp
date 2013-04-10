@@ -34,8 +34,8 @@ namespace MyScene
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
 
-            scatter.ItemsSource = 
-                Directory.GetFiles(@"C:\Users\Public\Pictures\Sample Pictures", "*.jpg");
+           // scatter.ItemsSource = 
+              //  Directory.GetFiles(@"C:\Users\Public\Pictures\Sample Pictures", "*.jpg");
 
         }
 

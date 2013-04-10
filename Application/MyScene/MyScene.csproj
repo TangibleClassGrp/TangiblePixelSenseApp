@@ -94,6 +94,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\ClipArt\pineTree.png" />
+    <Resource Include="Resources\Images\Backgrounds\blue-deep-ocean-water.jpg" />
+    <Resource Include="Resources\Images\Backgrounds\Scene 1.jpg" />
     <Resource Include="Desert.jpg" />
     <Content Include="Resources\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
