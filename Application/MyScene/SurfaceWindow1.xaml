@@ -4,25 +4,37 @@
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="MyScene"
     >
+    
+    <s:SurfaceWindow.Resources>
+        <DataTemplate x:Key="ContainerItemTemplate">
+            <Image Source="{Binding}" MaxWidth="200" />
+        </DataTemplate>
+    </s:SurfaceWindow.Resources>
+    
+    
 
     <s:SurfaceScrollViewer HorizontalScrollBarVisibility="Auto">
         <s:ScatterView x:Name="scatter" 
                 Height="2000" Width="2000" 
                 BorderBrush="Black" BorderThickness="3">
-            <s:ScatterViewItem CanScale="false" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="Green" BorderThickness="10">
-                <Image x:Name="background" Source="Resources/Images/Backgrounds/Scene 1.jpg" Stretch="Fill" /> <!--CJT may need to modify this a little, simulator makes it look uncentered and too large, but need to check on actual table -->
-                
+            
+            <!-- CJT Added for the working space which holds the current Background-->
+            <s:ScatterViewItem AllowDrop="True" CanScale="False" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="Green" BorderThickness="10">
+                <Image x:Name="background" Source="Resources/Images/Backgrounds/Scene 1.jpg" Stretch="Fill" /> 
             </s:ScatterViewItem>
-          <!--  <s:ScatterView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Image x:Name="img" Source="{Binding}"/>
-                        <s:SurfaceButton Click="OnItemClicked"
-                                     Content="Click Me!"
-                                     Width="100" Height="80"/>
-                    </Grid>
-                </DataTemplate>
-            </s:ScatterView.ItemTemplate> -->
+            
+            <!-- CJT Added for the Background Menu floating window-->
+            <s:ScatterViewItem >
+                <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>     
+            </s:ScatterViewItem>
+            
+            <!-- CJT Added for the first / default ClipArt floating menu window-->
+            <s:ScatterViewItem >
+                <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </s:ScatterViewItem>
+            
         </s:ScatterView>
     </s:SurfaceScrollViewer>
 </s:SurfaceWindow>

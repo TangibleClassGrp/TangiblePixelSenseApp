@@ -34,8 +34,22 @@ namespace MyScene
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
 
-           // scatter.ItemsSource = 
-              //  Directory.GetFiles(@"C:\Users\Public\Pictures\Sample Pictures", "*.jpg");
+            // CJT Add all Background Images to the default Background Selection Box
+            string[] BackgroundFileNames = Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\Backgrounds\", "*.jpg");
+            for (int i=0; i < BackgroundFileNames.Length; i++) 
+            {
+               BackgroundList.Items.Add(BackgroundFileNames[i]);
+            }
+
+            // CJT Add all the ClipArt Images to the default ClipArt Selection Box
+            string[] ClipArtFileNames = Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\ClipArt\", "*.png");
+            for (int j = 0; j < ClipArtFileNames.Length; j++)
+            {
+                ClipArtList.Items.Add(ClipArtFileNames[j]);
+            }
+
+            //scatter.ItemsSource = 
+              //  Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\Backgrounds\", "*.jpg");
 
         }
 
@@ -103,25 +117,6 @@ namespace MyScene
         private void OnWindowUnavailable(object sender, EventArgs e)
         {
             //TODO: disable audio, animations here
-        }
-
-        private void OnItemClicked(object sender, RoutedEventArgs e)
-        {
-            // Get the button that was clicked and hide it.
-            Button b = (Button)e.Source as Button;
-            b.Visibility = Visibility.Collapsed;
-
-            // Get the ScatterViewItem control for the clicked button.
-            ScatterViewItem item = (ScatterViewItem)scatter.ContainerFromElement(b);
-
-            // Get the image within the ScatterViewItemcontrol.
-            System.Windows.Controls.ContentPresenter content = FindContentPresenter(item);
-            System.Windows.Controls.Image img =
-             (System.Windows.Controls.Image)content.ContentTemplate.FindName("img", content);
-
-            // Convert the image to grayscale.
-            img.Source = new FormatConvertedBitmap(
-             (BitmapSource)img.Source, PixelFormats.Gray16, BitmapPalettes.Gray16, 0);
         }
 
         System.Windows.Controls.ContentPresenter FindContentPresenter(DependencyObject obj)
