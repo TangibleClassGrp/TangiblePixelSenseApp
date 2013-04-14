@@ -24,17 +24,117 @@
             </s:ScatterViewItem>
             
             <!-- CJT Added for the Background Menu floating window-->
-            <s:ScatterViewItem >
+            <s:ScatterViewItem x:Name="BackgroundListView">
                 <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>     
             </s:ScatterViewItem>
             
             <!-- CJT Added for the first / default ClipArt floating menu window-->
-            <s:ScatterViewItem >
+            <s:ScatterViewItem x:Name="ClipArtListView">
                 <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
             </s:ScatterViewItem>
-            
+
+
+
+            <!-- YKL Added for Sidebar. begin-->
+            <s:ScatterViewItem x:Name="Sidebar1" Background="Green" Height="200"
+                           Width="1000" CanRotate="False" CanScale="False" CanMove="False"
+                               Center="1000 0">
+                <s:ScatterViewItem.Triggers>
+                    <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar1">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="00:00:00"
+                                                 Duration="00:00:00.05"
+                                                 Storyboard.TargetName="SidebarButtons1"
+                                                 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                 To="99" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar1">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01"
+                                             Storyboard.TargetName="SidebarButtons1"
+                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                             To="0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </s:ScatterViewItem.Triggers>
+                <StackPanel>
+                    <Grid x:Name="SidebarButtons1" Canvas.ZIndex="0" Background="Gray" Height="100" Width="1000">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <s:SurfaceButton Click="TopButton1Clicked"
+                                             Margin="3.5,7,3.5,7"
+                                             Padding="0"
+                                             Name="TopButton1" Content="Open ClipArt">
+                            </s:SurfaceButton>
+                            <s:SurfaceButton Padding="0" 
+                                             Margin="3.5,7,3.5,7"  
+                                             Click="TopButton2Clicked" Content="Open Background">
+                            </s:SurfaceButton>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </s:ScatterViewItem>
+
+            <s:ScatterViewItem x:Name="Sidebar2" Background="Green" Height="200"
+                           Width="1000" CanRotate="False" CanScale="False" CanMove="False"
+                               Center="1000 2000" Orientation="180">
+                <s:ScatterViewItem.Triggers>
+                    <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar2">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="00:00:00"
+                                                 Duration="00:00:00.05"
+                                                 Storyboard.TargetName="SidebarButtons2"
+                                                 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                                 To="99" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar2">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01"
+                                             Storyboard.TargetName="SidebarButtons2"
+                                             Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"
+                                             To="0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </s:ScatterViewItem.Triggers>
+                <StackPanel>
+                    <Grid x:Name="SidebarButtons2" Canvas.ZIndex="0" Background="Gray" Height="100" Width="1000">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </Grid.RenderTransform>
+
+                        <StackPanel HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <s:SurfaceButton Click="BottomButton1Clicked"
+                                             Margin="3.5,7,3.5,7"
+                                             Padding="0" Content="Open ClipArt">
+                            </s:SurfaceButton>
+                            <s:SurfaceButton Padding="0" 
+                                             Margin="3.5,7,3.5,7"  
+                                             Click="BottomButton2Clicked" Content="Open Background">
+                            </s:SurfaceButton>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </s:ScatterViewItem>
+            <!-- YKL Added for Sidebar. end-->
+
+
         </s:ScatterView>
     </s:SurfaceScrollViewer>
 </s:SurfaceWindow>

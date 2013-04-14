@@ -35,18 +35,21 @@ namespace MyScene
             AddWindowAvailabilityHandlers();
 
             // CJT Add all Background Images to the default Background Selection Box
-            string[] BackgroundFileNames = Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\Backgrounds\", "*.jpg");
+            string[] BackgroundFileNames = Directory.GetFiles(@"..\..\Resources\Images\Backgrounds\", "*.jpg");
             for (int i=0; i < BackgroundFileNames.Length; i++) 
             {
                BackgroundList.Items.Add(BackgroundFileNames[i]);
             }
 
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
-            string[] ClipArtFileNames = Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\ClipArt\", "*.png");
+            string[] ClipArtFileNames = Directory.GetFiles(@"..\..\Resources\Images\ClipArt\", "*.png");
             for (int j = 0; j < ClipArtFileNames.Length; j++)
             {
                 ClipArtList.Items.Add(ClipArtFileNames[j]);
             }
+
+            //BackgroundListView.Visibility = System.Windows.Visibility.Hidden;
+            //ClipArtListView.Visibility = System.Windows.Visibility.Hidden;
 
             //scatter.ItemsSource = 
               //  Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\Backgrounds\", "*.jpg");
@@ -138,6 +141,35 @@ namespace MyScene
             }
             return null;
         }
+
+        #region Sidebar Code
+        void TopButton1Clicked(object sender, RoutedEventArgs e)
+        {
+            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
+            ClipArtListView.Center = new Point(900, 300);
+            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
+        }
+
+        void TopButton2Clicked(object sender, RoutedEventArgs e)
+        {
+            BackgroundListView.Visibility = System.Windows.Visibility.Visible;
+            BackgroundListView.Center = new Point(1100, 300);
+            BackgroundListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
+        }
+        void BottomButton1Clicked(object sender, RoutedEventArgs e)
+        {
+            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
+            ClipArtListView.Center = new Point(1100, 1700);
+            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
+        }
+
+        void BottomButton2Clicked(object sender, RoutedEventArgs e)
+        {
+            BackgroundListView.Visibility = System.Windows.Visibility.Visible;
+            BackgroundListView.Center = new Point(900, 1700);
+            BackgroundListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
+        }
+        #endregion Sidebar Code
 
     }
 }
