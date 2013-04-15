@@ -12,25 +12,22 @@
     </s:SurfaceWindow.Resources>
     
     
-
-    <s:SurfaceScrollViewer HorizontalScrollBarVisibility="Auto">
-        <s:ScatterView x:Name="scatter" 
-                Height="2000" Width="2000" 
-                BorderBrush="Black" BorderThickness="3">
+        <s:ScatterView x:Name="scatterView" 
+                  Background="Transparent">
             
             <!-- CJT Added for the working space which holds the current Background-->
-            <s:ScatterViewItem AllowDrop="True" CanScale="False" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="Green" BorderThickness="10">
-                <Image x:Name="background" Source="Resources/Images/Backgrounds/Scene 1.jpg" Stretch="Fill" /> 
+            <s:ScatterViewItem x:Name="MyMainWin" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
+                <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.jpg" Stretch="UniformToFill"/> 
             </s:ScatterViewItem>
             
             <!-- CJT Added for the Background Menu floating window-->
-            <s:ScatterViewItem x:Name="BackgroundListView">
+            <s:ScatterViewItem BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
                 <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>     
             </s:ScatterViewItem>
             
             <!-- CJT Added for the first / default ClipArt floating menu window-->
-            <s:ScatterViewItem x:Name="ClipArtListView">
+            <s:ScatterViewItem BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView">
                 <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
             </s:ScatterViewItem>
@@ -77,10 +74,7 @@
                                              Padding="0"
                                              Name="TopButton1" Content="Open ClipArt">
                             </s:SurfaceButton>
-                            <s:SurfaceButton Padding="0" 
-                                             Margin="3.5,7,3.5,7"  
-                                             Click="TopButton2Clicked" Content="Open Background">
-                            </s:SurfaceButton>
+                            
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -124,10 +118,7 @@
                                              Margin="3.5,7,3.5,7"
                                              Padding="0" Content="Open ClipArt">
                             </s:SurfaceButton>
-                            <s:SurfaceButton Padding="0" 
-                                             Margin="3.5,7,3.5,7"  
-                                             Click="BottomButton2Clicked" Content="Open Background">
-                            </s:SurfaceButton>
+                            
                         </StackPanel>
                     </Grid>
                 </StackPanel>
@@ -136,5 +127,5 @@
 
 
         </s:ScatterView>
-    </s:SurfaceScrollViewer>
+
 </s:SurfaceWindow>

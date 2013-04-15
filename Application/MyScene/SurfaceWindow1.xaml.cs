@@ -40,6 +40,7 @@ namespace MyScene
             {
                BackgroundList.Items.Add(BackgroundFileNames[i]);
             }
+            // CJT should add a LibraryBar.SetIsItemDataEnabled(whichitem, false); to disable what is currently on the main window
 
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
             string[] ClipArtFileNames = Directory.GetFiles(@"..\..\Resources\Images\ClipArt\", "*.png");
@@ -48,11 +49,7 @@ namespace MyScene
                 ClipArtList.Items.Add(ClipArtFileNames[j]);
             }
 
-            //BackgroundListView.Visibility = System.Windows.Visibility.Hidden;
-            //ClipArtListView.Visibility = System.Windows.Visibility.Hidden;
-
-            //scatter.ItemsSource = 
-              //  Directory.GetFiles(@"C:\Users\ctalbot\Documents\GitHub\TangiblePixelSenseApp\Application\MyScene\Resources\Images\Backgrounds\", "*.jpg");
+            
 
         }
 
@@ -66,6 +63,39 @@ namespace MyScene
 
             // Remove handlers for window availability events
             RemoveWindowAvailabilityHandlers();
+        }
+
+        // CJT Added for swapping the background images on the main window
+        private void scatterView_Drop(object sender, SurfaceDragDropEventArgs e)
+        {
+            // find the path information for the dragged object
+            FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
+            Image draggedElement = null;
+            while (draggedElement == null && findSource != null)
+            {
+                if ((draggedElement = findSource as Image) == null)
+                {
+                    findSource = VisualTreeHelper.GetChild(findSource, 0) as FrameworkElement;
+                }
+            }
+
+            if (draggedElement == null)
+            {
+                return;
+            }
+
+            string ImagePath = draggedElement.Source.ToString();
+            // create new image object for the dragged object
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+            img.Stretch = System.Windows.Media.Stretch.UniformToFill;
+            // overwrite the Main Window with this new image
+            MyMainWin.Content = img;
+            // be sure the dragged item is re-enabled in the Library
+            BackgroundList.SetIsItemDataEnabled(e.Cursor.Data, true);
+            // need to return existing item to the LibraryBar or do cleanup of MyMainWin to prevent extra images hanging out there
+            // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
+
         }
 
         /// <summary>
@@ -150,12 +180,7 @@ namespace MyScene
             ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
         }
 
-        void TopButton2Clicked(object sender, RoutedEventArgs e)
-        {
-            BackgroundListView.Visibility = System.Windows.Visibility.Visible;
-            BackgroundListView.Center = new Point(1100, 300);
-            BackgroundListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-        }
+        
         void BottomButton1Clicked(object sender, RoutedEventArgs e)
         {
             ClipArtListView.Visibility = System.Windows.Visibility.Visible;
@@ -163,12 +188,7 @@ namespace MyScene
             ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
         }
 
-        void BottomButton2Clicked(object sender, RoutedEventArgs e)
-        {
-            BackgroundListView.Visibility = System.Windows.Visibility.Visible;
-            BackgroundListView.Center = new Point(900, 1700);
-            BackgroundListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-        }
+        
         #endregion Sidebar Code
 
     }
