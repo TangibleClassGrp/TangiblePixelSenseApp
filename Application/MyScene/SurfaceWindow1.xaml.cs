@@ -35,7 +35,10 @@ namespace MyScene
             AddWindowAvailabilityHandlers();
 
             // CJT Add all Background Images to the default Background Selection Box
-            string[] BackgroundFileNames = Directory.GetFiles(@"..\..\Resources\Images\Backgrounds\", "*.jpg");
+            //var mystring = MyScene.App.Current.Resources.ToString();
+                //ResourceAssembly.Location.ToString();
+            string[] BackgroundFileNames = Directory.GetFiles(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\Backgrounds\", "*.png");
+            //var mystring = Directory.GetCurrentDirectory();
             for (int i=0; i < BackgroundFileNames.Length; i++) 
             {
                BackgroundList.Items.Add(BackgroundFileNames[i]);
@@ -43,7 +46,7 @@ namespace MyScene
             // CJT should add a LibraryBar.SetIsItemDataEnabled(whichitem, false); to disable what is currently on the main window
 
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
-            string[] ClipArtFileNames = Directory.GetFiles(@"..\..\Resources\Images\ClipArt\", "*.png");
+            string[] ClipArtFileNames = Directory.GetFiles(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\ClipArt\", "*.png");
             for (int j = 0; j < ClipArtFileNames.Length; j++)
             {
                 ClipArtList.Items.Add(ClipArtFileNames[j]);
@@ -85,17 +88,23 @@ namespace MyScene
             }
 
             string ImagePath = draggedElement.Source.ToString();
-            // create new image object for the dragged object
-            Image img = new Image();
-            img.Source = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
-            img.Stretch = System.Windows.Media.Stretch.UniformToFill;
-            // overwrite the Main Window with this new image
-            MyMainWin.Content = img;
-            // be sure the dragged item is re-enabled in the Library
+            if (ImagePath.IndexOf("Backgrounds") > 0)
+            {
+                // create new image object for the dragged object
+                Image img = new Image();
+                img.Source = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+                img.Stretch = System.Windows.Media.Stretch.UniformToFill;
+                // overwrite the Main Window with this new image
+                scatterView.Items.Remove(MyMainWin.Content);
+                MyMainWin.Content = img;
+                // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
+            }
+            else
+            {
+                // do logic for dropping clipart items!!!
+            }
+            // CJT this is needed to re-enable the item in the library!!
             BackgroundList.SetIsItemDataEnabled(e.Cursor.Data, true);
-            // need to return existing item to the LibraryBar or do cleanup of MyMainWin to prevent extra images hanging out there
-            // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
-
         }
 
         /// <summary>

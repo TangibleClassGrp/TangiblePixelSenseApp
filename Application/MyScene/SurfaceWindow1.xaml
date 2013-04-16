@@ -16,12 +16,12 @@
                   Background="Transparent">
             
             <!-- CJT Added for the working space which holds the current Background-->
-            <s:ScatterViewItem x:Name="MyMainWin" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="1500" Width="1500" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
-                <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.jpg" Stretch="UniformToFill"/> 
+            <s:ScatterViewItem x:Name="MyMainWin" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="800" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
+                <Image x:Name="background" Source="\..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/> 
             </s:ScatterViewItem>
             
             <!-- CJT Added for the Background Menu floating window-->
-            <s:ScatterViewItem BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
+            <s:ScatterViewItem Height="300" Width="500" BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
                 <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>     
             </s:ScatterViewItem>

@@ -94,9 +94,19 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\ClipArt\cloud1.png" />
+    <Resource Include="Resources\Images\ClipArt\cloud2.png" />
+    <Resource Include="Resources\Images\ClipArt\fishShape.png" />
+    <Resource Include="Resources\Images\ClipArt\seagrass.png" />
+    <Resource Include="Resources\Images\ClipArt\seaPlant01.png" />
+    <Resource Include="Resources\Images\ClipArt\seaPlant02.png" />
+    <Resource Include="Resources\Images\ClipArt\seaPlant03.png" />
+    <Resource Include="Resources\Images\ClipArt\starfish.png" />
+    <Resource Include="Resources\Images\ClipArt\sun.png" />
+    <Resource Include="Resources\Images\Backgrounds\blue-deep-ocean-water.png" />
+    <Resource Include="Resources\Images\Backgrounds\scene1.png" />
+    <Resource Include="Resources\Images\Backgrounds\scene2.png" />
     <Resource Include="Resources\Images\ClipArt\pineTree.png" />
-    <Resource Include="Resources\Images\Backgrounds\blue-deep-ocean-water.jpg" />
-    <Resource Include="Resources\Images\Backgrounds\Scene 1.jpg" />
     <Content Include="MyScene.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
