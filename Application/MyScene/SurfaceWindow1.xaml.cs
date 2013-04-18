@@ -50,6 +50,16 @@ namespace MyScene
             for (int j = 0; j < ClipArtFileNames.Length; j++)
             {
                 ClipArtList.Items.Add(ClipArtFileNames[j]);
+                ClipArtList1.Items.Add(ClipArtFileNames[j]);
+                ClipArtList2.Items.Add(ClipArtFileNames[j]);
+                ClipArtList3.Items.Add(ClipArtFileNames[j]);
+                ClipArtList4.Items.Add(ClipArtFileNames[j]);
+                ClipArtList5.Items.Add(ClipArtFileNames[j]);
+                ClipArtList6.Items.Add(ClipArtFileNames[j]);
+                ClipArtList7.Items.Add(ClipArtFileNames[j]);
+                ClipArtList8.Items.Add(ClipArtFileNames[j]);
+                ClipArtList9.Items.Add(ClipArtFileNames[j]);
+                ClipArtList10.Items.Add(ClipArtFileNames[j]);
             }
 
             

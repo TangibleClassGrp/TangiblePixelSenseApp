@@ -19,7 +19,7 @@
             
             <!-- CJT Added for the working space which holds the current Background-->
             <s:ScatterViewItem x:Name="MyMainWin" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="800" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
-                <Image x:Name="background" Source="\..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/> 
+                <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/> 
             </s:ScatterViewItem>
             
             <!-- CJT Added for the Background Menu floating window-->
@@ -41,10 +41,91 @@
             </StackPanel>
         </s:ScatterViewItem>
 
+        <!-- CJT Start of 10 HIDDEN ClipArt Windows-->
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView1" Center="-100,360" Orientation="90">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList1" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
 
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView2" Center="-100,720" Orientation="90">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList2" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
 
-            <!-- YKL Added for Sidebar. begin-->
-            <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_arrow}" CanRotate="False" CanScale="False" CanMove="False"
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView3" Center="2020,360" Orientation="270">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList3" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView4" Center="2020,720" Orientation="270">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList4" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView5" Center="480,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList5" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView6" Center="960,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList6" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView7" Center="1440,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList7" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView8" Center="480,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList8" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView9" Center="960,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList9" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView10" Center="1440,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList10" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+            
+            <!-- CJT End of 10 ClipArt windows for hiding -->
+
+        <!-- YKL Added for Sidebar. begin-->
+  <!-- CJT Commented out          <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_arrow}" CanRotate="False" CanScale="False" CanMove="False"
                             Height="200" Width="200" Center="500 0" >
                 <s:ScatterViewItem.Triggers>
                     <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar1">
@@ -378,6 +459,8 @@
                 </Grid>
             </StackPanel>
         </s:ScatterViewItem>
+            
+CJT End of comment out            -->
         <!-- YKL Added for Sidebar. end-->
 
 
