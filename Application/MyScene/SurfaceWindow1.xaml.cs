@@ -197,7 +197,12 @@ namespace MyScene
             ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
         }
 
-        
+        void ButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
+            ClipArtListView.Center = new Point(900, 300);
+            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
+        }
         #endregion Sidebar Code
 
     }
