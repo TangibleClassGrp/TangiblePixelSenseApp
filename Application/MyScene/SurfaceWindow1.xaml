@@ -18,21 +18,28 @@
                   Background="Transparent">
             
             <!-- CJT Added for the working space which holds the current Background-->
-            <s:ScatterViewItem x:Name="MyMainWin" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="800" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
+            <s:ScatterViewItem x:Name="MyMainWin" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="800" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
                 <Image x:Name="background" Source="\..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/> 
             </s:ScatterViewItem>
             
             <!-- CJT Added for the Background Menu floating window-->
-            <s:ScatterViewItem Height="300" Width="500" BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
-                <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
-                </s:LibraryBar>     
+            <s:ScatterViewItem Height="300" Width="500" Background="White" BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
+            <StackPanel>
+                <Label Content="Backgrounds" Background="Blue" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+                 
             </s:ScatterViewItem>
             
             <!-- CJT Added for the first / default ClipArt floating menu window-->
-            <s:ScatterViewItem BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView">
-                <s:LibraryBar  Height="1500" Width="1500" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+            <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
-            </s:ScatterViewItem>
+            </StackPanel>
+        </s:ScatterViewItem>
 
 
 
