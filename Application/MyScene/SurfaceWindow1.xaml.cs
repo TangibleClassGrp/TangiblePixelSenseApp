@@ -43,12 +43,12 @@ namespace MyScene
             // CJT Add all Background Images to the default Background Selection Box
             //var mystring = MyScene.App.Current.Resources.ToString();
             //ResourceAssembly.Location.ToString();
-            /*  string[] BackgroundFileNames = Directory.GetFiles(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\Backgrounds\", "*.png");
+              string[] BackgroundFileNames = Directory.GetFiles(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\Backgrounds\", "*.png");
               //var mystring = Directory.GetCurrentDirectory();
               for (int i=0; i < BackgroundFileNames.Length; i++) 
               {
                  BackgroundList.Items.Add(BackgroundFileNames[i]);
-              }*/
+              }
             // CJT should add a LibraryBar.SetIsItemDataEnabled(whichitem, false); to disable what is currently on the main window
 
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
@@ -122,12 +122,12 @@ namespace MyScene
             string ImagePath = draggedElement.Source.ToString();
 
             // create new image object for the dragged object
-            Image img = new Image();
-            img.Source = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
-            img.Stretch = System.Windows.Media.Stretch.UniformToFill;
+            ImageBrush img = new ImageBrush();
+            img.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+            img.Stretch = System.Windows.Media.Stretch.Fill;
             // overwrite the Main Window with this new image
-            scatterView.Items.Remove(MyMainWin.Content);
-            MyMainWin.Content = img;
+            scatterView.Items.Remove(scatterView.Background);
+            scatterView.Background = img;
             // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
 
         }
@@ -165,12 +165,12 @@ namespace MyScene
             if (ImagePath.IndexOf("Backgrounds") > 0)
             {
                 // create new image object for the dragged object
-                Image img = new Image();
-                img.Source = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
                 img.Stretch = System.Windows.Media.Stretch.UniformToFill;
                 // overwrite the Main Window with this new image
-                scatterView.Items.Remove(MyMainWin.Content);
-                MyMainWin.Content = img;
+                scatterView.Items.Remove(scatterView.Background);
+                scatterView.Background = img;
                 // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
             else
