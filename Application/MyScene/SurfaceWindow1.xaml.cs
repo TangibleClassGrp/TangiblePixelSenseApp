@@ -38,7 +38,7 @@ namespace MyScene
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
 
-
+           
 
             // CJT Add all Background Images to the default Background Selection Box
             //var mystring = MyScene.App.Current.Resources.ToString();
@@ -47,10 +47,27 @@ namespace MyScene
               //var mystring = Directory.GetCurrentDirectory();
               for (int i=0; i < BackgroundFileNames.Length; i++) 
               {
-                 BackgroundList.Items.Add(BackgroundFileNames[i]);
-              }
-            // CJT should add a LibraryBar.SetIsItemDataEnabled(whichitem, false); to disable what is currently on the main window
+                  SurfaceButton mybtn = new SurfaceButton();
+                  Image myimg = new Image();
+                  myimg.Source = new BitmapImage(new Uri(BackgroundFileNames[i], UriKind.RelativeOrAbsolute));
+                  //myimg.Width = 100;
+                  //myimg.Height = 75;
+                  myimg.Stretch = System.Windows.Media.Stretch.Fill;
 
+                  mybtn.Content = myimg;
+                  mybtn.CommandParameter = BackgroundFileNames[i];
+
+                  // add to context menu
+                  scatterView.ContextMenu.Items.Add(mybtn);
+                  // add to scatterviewitem as temporary fix
+                 // BackgroundList.Items.Add(BackgroundFileNames[i]);
+              }
+
+              SurfaceButton mybtn2 = new SurfaceButton();
+              mybtn2.Content = "Clear Screen";
+             // mybtn2.Command = clearScreen;
+              scatterView.ContextMenu.Items.Add(mybtn2);
+            
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
             string[] curDir = Directory.GetDirectories(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\ClipArt\");
             string[] ClipArtFileNames = null;
@@ -63,16 +80,6 @@ namespace MyScene
                     for (int j = 0; j < ClipArtFileNames.Length; j++)
                     {
                         ClipArtList.Items.Add(ClipArtFileNames[j]);
-                        /*ClipArtList1.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList2.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList3.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList4.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList5.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList6.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList7.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList8.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList9.Items.Add(ClipArtFileNames[j]);
-                        ClipArtList10.Items.Add(ClipArtFileNames[j]);*/
                     }
                 }
             }
@@ -101,44 +108,37 @@ namespace MyScene
         }
 
         // CJT Added for changing the background image after clicking it on the menu
-        private void changeBackground(object sender, SurfaceDragDropEventArgs e) // check what the params are for a menu click!!
+         void changeBackground(object sender, RoutedEventArgs e) // check what the params are for a menu click!!
         {
-            // find the path information for the dragged object
-            FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
-            Image draggedElement = null;
-            while (draggedElement == null && findSource != null)
-            {
-                if ((draggedElement = findSource as Image) == null)
-                {
-                    findSource = VisualTreeHelper.GetChild(findSource, 0) as FrameworkElement;
-                }
+            // find the path information for the chosen object
+             SurfaceButton findSourceA = (SurfaceButton)sender;
+             SurfaceButton findSourceB = (SurfaceButton)findSourceA.Content;
+             if (findSourceB.Content is Image) { // is a background image
+                Image myimg = (Image)((SurfaceButton)findSourceA.Content).Content;
+          
+                string ImagePath = myimg.Source.ToString();
+                // create new image object for the dragged object
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+                img.Stretch = System.Windows.Media.Stretch.Fill;
+                // overwrite the Main Window with this new image
+                scatterView.Items.Remove(scatterView.Background);
+                scatterView.Background = img;
+                // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
-
-            if (draggedElement == null)
+            else // is the clear screen item
             {
-                return;
+                clearScreen();
             }
-
-            string ImagePath = draggedElement.Source.ToString();
-
-            // create new image object for the dragged object
-            ImageBrush img = new ImageBrush();
-            img.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
-            img.Stretch = System.Windows.Media.Stretch.Fill;
-            // overwrite the Main Window with this new image
-            scatterView.Items.Remove(scatterView.Background);
-            scatterView.Background = img;
-            // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
-
         }
 
         // CJT Added for clearing the screen
-        private void clearScreen(object sender, SurfaceDragDropEventArgs e) // check the params for the menu click
+         void clearScreen() // check the params for the menu click
         {
-            foreach (ScatterViewItem img in curClipArt)
+            while (curClipArt.Count > 0)
             {
-                scatterView.Items.Remove(img); // remove from screen
-                curClipArt.Remove(img); // remove from list
+                scatterView.Items.Remove(curClipArt[0]);
+                curClipArt.RemoveAt(0);
             }
         }
 
@@ -162,7 +162,7 @@ namespace MyScene
             }
 
             string ImagePath = draggedElement.Source.ToString();
-            if (ImagePath.IndexOf("Backgrounds") > 0)
+            if (ImagePath.IndexOf("Backgrounds") > 0) // shouldn't hit this anymore, but kept in case wanted it later
             {
                 // create new image object for the dragged object
                 ImageBrush img = new ImageBrush();
