@@ -4,37 +4,37 @@
     xmlns:s="http://schemas.microsoft.com/surface/2008"
     Title="MyScene"
     >
-    
+
     <s:SurfaceWindow.Resources>
         <DataTemplate x:Key="ContainerItemTemplate">
             <Image Source="{Binding}" MaxWidth="200" />
         </DataTemplate>
-        <ImageBrush x:Key="button_arrow"  Stretch="Fill" ImageSource="Resources/whitearrow.png"/>
-        <ImageBrush x:Key="button_circle"  Stretch="Fill" ImageSource="Resources/button.png"/>
+       <!-- <ImageBrush x:Key="button_arrow"  Stretch="Fill" ImageSource="Resources/whitearrow.png"/>
+        <ImageBrush x:Key="button_circle"  Stretch="Fill" ImageSource="Resources/button.png"/> -->
     </s:SurfaceWindow.Resources>
-    
-    
-        <s:ScatterView x:Name="scatterView" 
+
+
+    <s:ScatterView x:Name="scatterView"
                   Background="Transparent">
-            
-            <!-- CJT Added for the working space which holds the current Background-->
-            <s:ScatterViewItem x:Name="MyMainWin" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" Height="800" Width="1200" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
-                <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/> 
-            </s:ScatterViewItem>
-            
-            <!-- CJT Added for the Background Menu floating window-->
-            <s:ScatterViewItem Height="300" Width="500" Background="White" BorderThickness="20" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
+
+        <!-- CJT Added for the working space which holds the current Background-->
+        <s:ScatterViewItem x:Name="MyMainWin" IsTopmostOnActivation="False" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" CanRotate="False" CanMove="False" Height="580" Width="1420" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
+            <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/>
+        </s:ScatterViewItem>
+
+        <!-- CJT Added for the Background Menu floating window-->
+        <!-- <s:ScatterViewItem Height="300" Width="500" Background="White" BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
             <StackPanel>
                 <Label Content="Backgrounds" Background="Blue" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
                 <s:LibraryBar Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
             </StackPanel>
                  
-            </s:ScatterViewItem>
-            
-            <!-- CJT Added for the first / default ClipArt floating menu window-->
-            <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="20" BorderBrush="White" x:Name="ClipArtListView">
-                <StackPanel>
+            </s:ScatterViewItem>-->
+
+        <!-- CJT Added for the first / default ClipArt floating menu window-->
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <StackPanel>
                 <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
                 <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
@@ -42,7 +42,7 @@
         </s:ScatterViewItem>
 
         <!-- CJT Start of 10 HIDDEN ClipArt Windows-->
-        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView1" Center="-100,360" Orientation="90">
+        <!-- <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView1" Center="-100,360" Orientation="90">
             <StackPanel>
                 <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
                 <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList1" ItemTemplate="{StaticResource ContainerItemTemplate}">
@@ -120,12 +120,12 @@
                 <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList10" ItemTemplate="{StaticResource ContainerItemTemplate}">
                 </s:LibraryBar>
             </StackPanel>
-        </s:ScatterViewItem>
-            
-            <!-- CJT End of 10 ClipArt windows for hiding -->
+        </s:ScatterViewItem>-->
+
+        <!-- CJT End of 10 ClipArt windows for hiding -->
 
         <!-- YKL Added for Sidebar. begin-->
-  <!-- CJT Commented out          <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_arrow}" CanRotate="False" CanScale="False" CanMove="False"
+        <!-- CJT Commented out          <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_arrow}" CanRotate="False" CanScale="False" CanMove="False"
                             Height="200" Width="200" Center="500 0" >
                 <s:ScatterViewItem.Triggers>
                     <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar1">
@@ -464,6 +464,6 @@ CJT End of comment out            -->
         <!-- YKL Added for Sidebar. end-->
 
 
-        </s:ScatterView>
+    </s:ScatterView>
 
 </s:SurfaceWindow>
