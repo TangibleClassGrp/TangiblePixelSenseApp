@@ -79,7 +79,7 @@ namespace MyScene
                     ClipArtFileNames = Directory.GetFiles(curDir[i]+@"\", "*.png");
                     for (int j = 0; j < ClipArtFileNames.Length; j++)
                     {
-                        ClipArtList.Items.Add(ClipArtFileNames[j]);
+                        //ClipArtList.Items.Add(ClipArtFileNames[j]);
                         ClipArtList1.Items.Add(ClipArtFileNames[j]);
                         ClipArtList2.Items.Add(ClipArtFileNames[j]);
                         ClipArtList3.Items.Add(ClipArtFileNames[j]);
@@ -205,7 +205,7 @@ namespace MyScene
                 casvi.CanScale = true;
                 casvi.Name = "DraggedClipArt" + curIndex;
                 casvi.Center = e.Cursor.GetPosition(scatterView);
-                casvi.Orientation = e.Cursor.GetOrientation(ClipArtList); // need to find which window dragged this object
+                //casvi.Orientation = e.Cursor.GetOrientation(ClipArtList); // need to find which window dragged this object
 
 
                 // Add to global tracker of clipart spawned, then add to screen
@@ -217,7 +217,7 @@ namespace MyScene
             }
             // CJT this is needed to re-enable the item in the library!!
             //BackgroundList.SetIsItemDataEnabled(e.Cursor.Data, true);
-            ClipArtList.SetIsItemDataEnabled(e.Cursor.Data, true); // need to do for all current clipart bars that are open OR look for which one dragged it here
+            //ClipArtList.SetIsItemDataEnabled(e.Cursor.Data, true); // need to do for all current clipart bars that are open OR look for which one dragged it here
         }
 
         /// <summary>
@@ -294,30 +294,6 @@ namespace MyScene
             return null;
         }
 
-        #region Sidebar Code
-        void TopButton1Clicked(object sender, RoutedEventArgs e)
-        {
-            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
-            ClipArtListView.Center = new Point(900, 300);
-            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-        }
-
-
-        void BottomButton1Clicked(object sender, RoutedEventArgs e)
-        {
-            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
-            ClipArtListView.Center = new Point(1100, 1700);
-            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-        }
-
-        void ButtonClicked(object sender, RoutedEventArgs e)
-        {
-            ClipArtListView.Visibility = System.Windows.Visibility.Visible;
-            ClipArtListView.Center = new Point(900, 300);
-            ClipArtListView.SetRelativeZIndex(RelativeScatterViewZIndex.Topmost);
-        }
-        #endregion Sidebar Code
-
         // CJT created for removing the item when dropped on the clipart window -- needs some more work
         private void ClipArtListView_Drop(object sender, SurfaceDragDropEventArgs e)
         {
@@ -342,5 +318,10 @@ namespace MyScene
             curClipArt.Remove(draggedElement); // remove from list
         }
 
+        private void c_previewTouchDown(object sender, SurfaceDragDropEventArgs e)
+        {
+            //
+        }
+        
     }
 }

@@ -2,12 +2,12 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:s="http://schemas.microsoft.com/surface/2008"
-    Title="MyScene"
+    Title="Dream-A-Scene"
     >
 
     <s:SurfaceWindow.Resources>
         <DataTemplate x:Key="ContainerItemTemplate">
-            <Image Source="{Binding}" MaxWidth="200" />
+            <Image Source="{Binding}" MaxWidth="200"/>
         </DataTemplate>
         <!-- CJT Added for the Context Menu -->
         <DataTemplate x:Key="MenuItemTemplate">
@@ -22,9 +22,25 @@
         <ContextMenu x:Key="openMenu" Background="Black" BorderBrush="White" BorderThickness="3" HasDropShadow="True" ItemTemplate="{StaticResource MenuItemTemplate}" x:Name="BkgrdMenu" />
 
     </s:SurfaceWindow.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="680" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="660" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="660" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
 
 
-    <s:ScatterView ContextMenu="{StaticResource openMenu}" x:Name="scatterView" Background="{StaticResource BkgrdBrush}" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True">
+        <s:ScatterView 
+        Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+        x:Name="scatterView" Background="{StaticResource BkgrdBrush}" AllowDrop="True" s:SurfaceDragDrop.Drop="scatterView_Drop" ContextMenu="{StaticResource openMenu}">
 
         <!-- CJT Added for the working space which holds the current Background-->
     <!--    <s:ScatterViewItem x:Name="MyMainWin" IsTopmostOnActivation="False" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" CanRotate="False" CanMove="False" Height="580" Width="1420" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
@@ -43,7 +59,7 @@
                  
             </s:ScatterViewItem> -->
 
-        <!-- CJT Added for the first / default ClipArt floating menu window-->
+        <!-- CJT Added for the first / default ClipArt floating menu window
         <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
             <StackPanel>
                 <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
@@ -51,7 +67,7 @@
                 </s:LibraryBar>
             </StackPanel>
         </s:ScatterViewItem>
-
+        -->
 
         <!-- CJT Start of 10 HIDDEN ClipArt Windows-->
         <!-- <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView1" Center="-100,360" Orientation="90">
@@ -135,10 +151,15 @@
         </s:ScatterViewItem>-->
 
         <!-- CJT End of 10 ClipArt windows for hiding -->
+    </s:ScatterView>
+
 
         <!-- YKL Added for Sidebar. begin-->
+
+        
+        <s:ScatterView Grid.Row="0" Grid.Column="1" >
         <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="600 0" Orientation="180">
+                            Height="400" Width="660" Center="330 0" Orientation="180">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar1">
                     <BeginStoryboard>
@@ -166,12 +187,14 @@
                         <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList1" ItemTemplate="{StaticResource ContainerItemTemplate}">
                         </s:LibraryBar>
                     </StackPanel>
-            </Grid>
+                </Grid>
             </StackPanel>
         </s:ScatterViewItem>
+        </s:ScatterView>
 
-        <s:ScatterViewItem x:Name="Sidebar2"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="1320 0" Orientation="180">
+        <s:ScatterView Grid.Row="0" Grid.Column="3" >
+            <s:ScatterViewItem x:Name="Sidebar2"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 0" Orientation="180">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar2">
                     <BeginStoryboard>
@@ -190,7 +213,7 @@
                     </BeginStoryboard>
                 </EventTrigger>
             </s:ScatterViewItem.Triggers>
-            <StackPanel>
+            <StackPanel Orientation="Vertical">
                 <Grid x:Name="SidebarButtons2" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
                     <Grid.RenderTransform>
                         <TranslateTransform X="0" Y="200" />
@@ -202,9 +225,12 @@
                 </Grid>
             </StackPanel>
         </s:ScatterViewItem>
+        </s:ScatterView>
 
-        <s:ScatterViewItem x:Name="Sidebar3"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="600 1080" Orientation="0">
+        <s:ScatterView Grid.Row="2" Grid.Column="1" >
+            <s:ScatterViewItem x:Name="Sidebar3"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 200" Orientation="0"
+                           Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar3">
                     <BeginStoryboard>
@@ -235,9 +261,11 @@
                 </Grid>
             </StackPanel>
         </s:ScatterViewItem>
+        </s:ScatterView>
 
-        <s:ScatterViewItem x:Name="Sidebar4"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="1320 1080" Orientation="0">
+        <s:ScatterView Grid.Row="2" Grid.Column="3" >
+            <s:ScatterViewItem x:Name="Sidebar4"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 200" Orientation="0">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar4">
                     <BeginStoryboard>
@@ -268,15 +296,17 @@
                 </Grid>
             </StackPanel>
         </s:ScatterViewItem>
+        </s:ScatterView>
 
-        <s:ScatterViewItem x:Name="Sidebar5"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="0 540" Orientation="90">
+        <s:ScatterView Grid.Column="0" Grid.Row="1" AllowDrop="True">
+            <s:ScatterViewItem x:Name="Sidebar5"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"  AllowDrop="True"
+                            Height="400" Width="660" Center="0 340" Orientation="90" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar5">
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons5"
-                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -284,27 +314,29 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons5"
-                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
             </s:ScatterViewItem.Triggers>
-            <StackPanel>
-                <Grid x:Name="SidebarButtons5" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
-                    <Grid.RenderTransform>
-                        <TranslateTransform X="0" Y="200" />
-                    </Grid.RenderTransform>
-                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList5" ItemTemplate="{StaticResource ContainerItemTemplate}">
-                        </s:LibraryBar>
-                    </StackPanel>
-                </Grid>
-            </StackPanel>
-        </s:ScatterViewItem>
+            <StackPanel >
+                    <Grid x:Name="SidebarButtons5" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="200" />
+                        </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" >
+                            <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList5" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                            </s:LibraryBar>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </s:ScatterViewItem>
+        </s:ScatterView>
 
-
+        <s:ScatterView Grid.Column="4" Grid.Row="1"  AllowDrop="True">
         <s:ScatterViewItem x:Name="Sidebar6"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
-                            Height="400" Width="700" Center="1920 540" Orientation="270">
+                            Height="400" Width="660" Center="200 340 " Orientation="270"  AllowDrop="True"
+                           s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
             <s:ScatterViewItem.Triggers>
                 <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar6">
                     <BeginStoryboard>
@@ -335,10 +367,8 @@
                 </Grid>
             </StackPanel>
         </s:ScatterViewItem>
-
+        </s:ScatterView>
         <!-- YKL Added for Sidebar. end-->
 
-
-    </s:ScatterView>
-
+    </Grid>
 </s:SurfaceWindow>
