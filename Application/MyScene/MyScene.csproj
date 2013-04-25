@@ -95,10 +95,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene01.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene02.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene03.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene04.png" />
+    <Resource Include="Resources\Images\Backgrounds\scene01.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Backgrounds\scene02.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Backgrounds\scene03.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Backgrounds\scene04.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\ClipArt\bush01.png" />
     <Resource Include="Resources\Images\ClipArt\butterfly01.png" />
     <Resource Include="Resources\Images\ClipArt\butterfly02.png" />
@@ -138,13 +146,22 @@
     <Resource Include="Resources\Images\ClipArt\seaPlant03.png" />
     <Resource Include="Resources\Images\ClipArt\starfish.png" />
     <Resource Include="Resources\Images\ClipArt\sun.png" />
-    <Resource Include="Resources\Images\Backgrounds\blue-deep-ocean-water.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene1.png" />
-    <Resource Include="Resources\Images\Backgrounds\scene2.png" />
+    <Resource Include="Resources\Images\Backgrounds\blue-deep-ocean-water.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Backgrounds\scene1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\Backgrounds\scene2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="MyScene.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\whitearrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

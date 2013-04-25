@@ -16,115 +16,23 @@ using Microsoft.Surface.Presentation;
 using Microsoft.Surface.Presentation.Controls;
 using Microsoft.Surface.Presentation.Input;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Collections.ObjectModel;
 
 namespace MyScene
 {
     /// <summary>
     /// Interaction logic for SurfaceWindow1.xaml
     /// </summary>
-    /// 
     public partial class SurfaceWindow1 : SurfaceWindow
     {
         int curIndex = 0;
         List<ScatterViewItem> curClipArt = new List<ScatterViewItem>();
 
-        //GLC - Class to simulate mouse input in order to streamline touch prototypting. Todo: Replace ContextMenu with a touch-compatible object.
-        public class MouseSimulator
-        {
-            [DllImport("user32.dll", SetLastError = true)]
-            static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
 
-            [StructLayout(LayoutKind.Sequential)]
-            struct INPUT
-            {
-                public SendInputEventType type;
-                public MouseKeybdhardwareInputUnion mkhi;
-            }
-            [StructLayout(LayoutKind.Explicit)]
-            struct MouseKeybdhardwareInputUnion
-            {
-                [FieldOffset(0)]
-                public MouseInputData mi;
-
-                [FieldOffset(0)]
-                public KEYBDINPUT ki;
-
-                [FieldOffset(0)]
-                public HARDWAREINPUT hi;
-            }
-            [StructLayout(LayoutKind.Sequential)]
-            struct KEYBDINPUT
-            {
-                public ushort wVk;
-                public ushort wScan;
-                public uint dwFlags;
-                public uint time;
-                public IntPtr dwExtraInfo;
-            }
-            [StructLayout(LayoutKind.Sequential)]
-            struct HARDWAREINPUT
-            {
-                public int uMsg;
-                public short wParamL;
-                public short wParamH;
-            }
-            struct MouseInputData
-            {
-                public int dx;
-                public int dy;
-                public uint mouseData;
-                public MouseEventFlags dwFlags;
-                public uint time;
-                public IntPtr dwExtraInfo;
-            }
-            [Flags]
-            enum MouseEventFlags : uint
-            {
-                MOUSEEVENTF_MOVE = 0x0001,
-                MOUSEEVENTF_LEFTDOWN = 0x0002,
-                MOUSEEVENTF_LEFTUP = 0x0004,
-                MOUSEEVENTF_RIGHTDOWN = 0x0008,
-                MOUSEEVENTF_RIGHTUP = 0x0010,
-                MOUSEEVENTF_MIDDLEDOWN = 0x0020,
-                MOUSEEVENTF_MIDDLEUP = 0x0040,
-                MOUSEEVENTF_XDOWN = 0x0080,
-                MOUSEEVENTF_XUP = 0x0100,
-                MOUSEEVENTF_WHEEL = 0x0800,
-                MOUSEEVENTF_VIRTUALDESK = 0x4000,
-                MOUSEEVENTF_ABSOLUTE = 0x8000
-            }
-            enum SendInputEventType : int
-            {
-                InputMouse,
-                InputKeyboard,
-                InputHardware
-            }
-
-            public static void ClickRightMouseButton()
-            {
-                INPUT mouseDownInput = new INPUT();
-                mouseDownInput.type = SendInputEventType.InputMouse;
-                mouseDownInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTDOWN;
-                SendInput(1, ref mouseDownInput, Marshal.SizeOf(new INPUT()));
-
-                INPUT mouseUpInput = new INPUT();
-                mouseUpInput.type = SendInputEventType.InputMouse;
-                mouseUpInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTUP;
-                SendInput(1, ref mouseUpInput, Marshal.SizeOf(new INPUT()));
-            }
-        }
         /// <summary>
         /// Default constructor.
         /// </summary>
-//#region OnInitialized
-
-
-public SurfaceWindow1()
+        public SurfaceWindow1()
         {
-
             InitializeComponent();
 
             // Add handlers for window availability events
@@ -135,12 +43,10 @@ public SurfaceWindow1()
             // CJT Add all Background Images to the default Background Selection Box
             //var mystring = MyScene.App.Current.Resources.ToString();
             //ResourceAssembly.Location.ToString();
-              ObservableCollection<string> items = new ObservableCollection<string>();
               string[] BackgroundFileNames = Directory.GetFiles(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\Backgrounds\", "*.png");
               //var mystring = Directory.GetCurrentDirectory();
               for (int i=0; i < BackgroundFileNames.Length; i++) 
               {
-                  MainLibraryBar.Items.Add(BackgroundFileNames[i]);
                   SurfaceButton mybtn = new SurfaceButton();
                   Image myimg = new Image();
                   myimg.Source = new BitmapImage(new Uri(BackgroundFileNames[i], UriKind.RelativeOrAbsolute));
@@ -150,14 +56,13 @@ public SurfaceWindow1()
 
                   mybtn.Content = myimg;
                   mybtn.CommandParameter = BackgroundFileNames[i];
-                  mybtn.Click += new RoutedEventHandler(this.changeBackground);
+
                   // add to context menu
                   scatterView.ContextMenu.Items.Add(mybtn);
-                  //BGMenu.Items.Add(myimg);
                   // add to scatterviewitem as temporary fix
                  // BackgroundList.Items.Add(BackgroundFileNames[i]);
               }
-              
+
               SurfaceButton mybtn2 = new SurfaceButton();
               mybtn2.Content = "Clear Screen";
              // mybtn2.Command = clearScreen;
@@ -214,7 +119,6 @@ public SurfaceWindow1()
             // find the path information for the chosen object
              SurfaceButton findSourceA = (SurfaceButton)sender;
              SurfaceButton findSourceB = (SurfaceButton)findSourceA.Content;
-
              if (findSourceB.Content is Image) { // is a background image
                 Image myimg = (Image)((SurfaceButton)findSourceA.Content).Content;
           
@@ -417,73 +321,6 @@ public SurfaceWindow1()
         private void c_previewTouchDown(object sender, SurfaceDragDropEventArgs e)
         {
             //
-        }
-
-        //GLC - Added "BGMenu" and touch functionality to the background menu.
-        private void scatterView_TouchDown(object sender, TouchEventArgs e)
-        {
-            //if (BGMenu.Visibility == Visibility.Visible)
-            //{
-            //    //The menu is already up. Hide it.
-            //    BGMenu.Visibility = Visibility.Hidden;
-            //    Menu.Center = new Point(-500, -500);
-            //}
-            //else //Show the menu
-            //{
-            //    BGMenu.Visibility = Visibility.Visible;
-            //    Menu.Center = new Point(960, 540);
-            //}
-
-            ////Mouse Prototyping - no longer used.
-            ///* Bind this event to a click event for the context menu.
-            //Artificially trigger a right-click with touch.
-            //MouseSimulator.ClickRightMouseButton(); */
-        }
-
-        //GLC - Added touch functionality to the scatterview item "menu," which contains BGMenu.
-        private void Menu_TouchDown(object sender, TouchEventArgs e)
-        {
-            //if (BGMenu.Visibility == Visibility.Hidden)
-            //{
-            //    e.Handled = false;
-            //}
-            //else
-            //{
-            //    //Do nothing
-            //}
-        }
-
-        //GLC - Implemented the hold gesture for showing and hiding the menu to change backgrounds.
-        private void scatterView_HoldGesture(object sender, TouchEventArgs e)
-        {
-            if (BGMenu.Visibility == Visibility.Visible)
-            {
-                //The menu is already up. Hide it.
-                BGMenu.Visibility = Visibility.Hidden;
-                Menu.Center = new Point(-500, -500);
-            }
-            else //Show the menu
-            {
-                BGMenu.Visibility = Visibility.Visible;
-                Menu.Center = new Point(960, 540);
-            }
-
-            //Mouse Prototyping - no longer used.
-            /* Bind this event to a click event for the context menu.
-            Artificially trigger a right-click with touch.
-            MouseSimulator.ClickRightMouseButton(); */
-        }
-        //GLC - Menu hold gesture event handler
-        private void Menu_HoldGesture(object sender, TouchEventArgs e)
-        {
-            if (BGMenu.Visibility == Visibility.Hidden)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                //Do nothing
-            }
         }
         
     }
