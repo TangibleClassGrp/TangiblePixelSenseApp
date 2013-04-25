@@ -161,6 +161,7 @@ public SurfaceWindow1()
               SurfaceButton mybtn2 = new SurfaceButton();
               mybtn2.Content = "Clear Screen";
              // mybtn2.Command = clearScreen;
+              MainLibraryBar.Items.Add(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\clearscreen.png");
               scatterView.ContextMenu.Items.Add(mybtn2);
             
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
@@ -273,9 +274,15 @@ public SurfaceWindow1()
                 // overwrite the Main Window with this new image
                 scatterView.Items.Remove(scatterView.Background);
                 scatterView.Background = img;
+                MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
                 // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
-            else
+            else if (ImagePath.IndexOf("clearscreen") > 0)
+            {
+                MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
+                clearScreen();
+            } 
+            else 
             {
                 // do logic for dropping clipart items!!!
                 Image caimg = new Image();
@@ -307,8 +314,12 @@ public SurfaceWindow1()
                 // Add to global tracker of clipart spawned, then add to screen
                 curClipArt.Add(casvi);
                 scatterView.Items.Add(casvi);
-
-                //sender.SetIsItemDataEnabled(e.Cursor.Data, true);
+                ClipArtList1.SetIsItemDataEnabled(e.Cursor.Data, true);
+                ClipArtList2.SetIsItemDataEnabled(e.Cursor.Data, true);
+                ClipArtList3.SetIsItemDataEnabled(e.Cursor.Data, true);
+                ClipArtList4.SetIsItemDataEnabled(e.Cursor.Data, true); 
+                ClipArtList5.SetIsItemDataEnabled(e.Cursor.Data, true);
+                ClipArtList6.SetIsItemDataEnabled(e.Cursor.Data, true);
 
             }
             // CJT this is needed to re-enable the item in the library!!
