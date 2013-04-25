@@ -20,6 +20,66 @@
         <!-- <ImageBrush x:Key="button_circle"  Stretch="Fill" ImageSource="Resources/button.png"/> -->
         <!-- CJT Added so have a context menu on the scatterview -->
         <ContextMenu x:Key="openMenu" Background="Black" BorderBrush="Transparent" BorderThickness="0" HasDropShadow="True" ItemTemplate="{StaticResource MenuItemTemplate}" x:Name="BkgrdMenu" />
+        <Style x:Key="ScatterViewItemStyle1" TargetType="{x:Type s:ScatterViewItem}">
+            <Setter Property="Background" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type s:SurfaceColors}}}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type s:SurfaceColors}}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="MinHeight" Value="80"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type s:ScatterViewItem}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="DeactivateTimeline"/>
+                            <Storyboard x:Key="ActivationTimeline">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Overlay">
+                                    <SplineDoubleKeyFrame KeySpline="0,0.43,0.2,1" KeyTime="0:0:0.017" Value="0.1"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.21,0,0,1" KeyTime="0:0:1.3" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="container" RenderTransformOrigin="{TemplateBinding RenderTransformOrigin}">
+                            <Grid.RenderTransform>
+                                <ScaleTransform ScaleY="1" ScaleX="1"/>
+                            </Grid.RenderTransform>
+                            <Border x:Name="contentBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Height="{TemplateBinding Height}" MaxWidth="{TemplateBinding MaxWidth}" MaxHeight="{TemplateBinding MaxHeight}" MinWidth="{TemplateBinding MinWidth}" MinHeight="{TemplateBinding MinHeight}" Width="{TemplateBinding Width}">
+                                <Grid>
+                                    <ContentPresenter x:Name="Content" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <Border x:Name="Overlay" Background="#FFE6E6E6" IsHitTestVisible="False" Opacity="0"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsContainerActive" Value="True"/>
+                                    <Condition Property="ShowsActivationEffects" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <BeginStoryboard x:Name="ActivationTimeline_BeginStoryboard">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Overlay">
+                                                <SplineDoubleKeyFrame KeySpline="0,0.43,0.2,1" KeyTime="0:0:0.017" Value="0.1"/>
+                                                <SplineDoubleKeyFrame KeySpline="0.21,0,0,1" KeyTime="0:0:1.3" Value="0"/>
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiTrigger.EnterActions>
+                                <MultiTrigger.ExitActions>
+                                    <BeginStoryboard x:Name="DeactivateTimeline_BeginStoryboard"/>
+                                </MultiTrigger.ExitActions>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="Content" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </s:SurfaceWindow.Resources>
     <Grid>
@@ -43,7 +103,7 @@
         <!-- YKL Added for Sidebar. begin-->
 
         
-        <s:ScatterView Grid.Row="0" Grid.Column="1" >
+        <s:ScatterView Grid.Row="0" Grid.Column="1" ItemContainerStyle="{DynamicResource ScatterViewItemStyle1}" >
         <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
                             Height="400" Width="660" Center="330 0" Orientation="180">
             <s:ScatterViewItem.Triggers>
