@@ -275,12 +275,15 @@ public SurfaceWindow1()
                 scatterView.Items.Remove(scatterView.Background);
                 scatterView.Background = img;
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
+                BGMenu.Visibility = Visibility.Hidden;
                 // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
             else if (ImagePath.IndexOf("clearscreen") > 0)
             {
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
+                BGMenu.Visibility = Visibility.Hidden;
                 clearScreen();
+
             } 
             else 
             {
