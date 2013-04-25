@@ -1,0 +1,374 @@
+﻿<s:SurfaceWindow x:Class="MyScene.SurfaceWindow1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="http://schemas.microsoft.com/surface/2008"
+    Title="Dream-A-Scene"
+    >
+
+    <s:SurfaceWindow.Resources>
+        <DataTemplate x:Key="ContainerItemTemplate">
+            <Image Source="{Binding}" MaxWidth="200"/>
+        </DataTemplate>
+        <!-- CJT Added for the Context Menu -->
+        <DataTemplate x:Key="MenuItemTemplate">
+            <s:SurfaceButton Click="changeBackground" Content="{Binding}" Width="100" Height="50" >
+            </s:SurfaceButton>
+        </DataTemplate>
+        <!-- CJT Added for the table's background image-->
+        <ImageBrush x:Key="BkgrdBrush" Stretch="Fill" ImageSource="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" />
+        <ImageBrush x:Key="button_whitearrow"  Stretch="Fill" ImageSource="Resources/whitearrow.png"/>
+        <!-- <ImageBrush x:Key="button_circle"  Stretch="Fill" ImageSource="Resources/button.png"/> -->
+        <!-- CJT Added so have a context menu on the scatterview -->
+        <ContextMenu x:Key="openMenu" Background="Black" BorderBrush="White" BorderThickness="3" HasDropShadow="True" ItemTemplate="{StaticResource MenuItemTemplate}" x:Name="BkgrdMenu" />
+
+    </s:SurfaceWindow.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200" />
+            <RowDefinition Height="680" />
+            <RowDefinition Height="200" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="660" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="660" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+
+        <s:ScatterView 
+        Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+        x:Name="scatterView" Background="{StaticResource BkgrdBrush}" AllowDrop="True" s:SurfaceDragDrop.Drop="scatterView_Drop" ContextMenu="{StaticResource openMenu}">
+
+        <!-- CJT Added for the working space which holds the current Background-->
+    <!--    <s:ScatterViewItem x:Name="MyMainWin" IsTopmostOnActivation="False" Center="960,540" Background="Transparent" s:SurfaceDragDrop.Drop="scatterView_Drop" AllowDrop="True" CanScale="False" CanRotate="False" CanMove="False" Height="580" Width="1420" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="0" BorderBrush="White" BorderThickness="5">
+            <StackPanel>
+                <Image x:Name="background" Source="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" Stretch="UniformToFill"/>
+            </StackPanel>
+        </s:ScatterViewItem>-->
+
+        <!-- CJT Added for the Background Menu floating window-->
+        <!-- <s:ScatterViewItem Height="300" Width="500" Background="White" BorderThickness="10" BorderBrush="White" CanMove="True" CanRotate="True" CanScale="True">
+            <StackPanel>
+                <Label Content="Backgrounds" Background="Blue" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="BackgroundList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+                 
+            </s:ScatterViewItem> -->
+
+        <!-- CJT Added for the first / default ClipArt floating menu window
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar Rows="1"  Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+        -->
+
+        <!-- CJT Start of 10 HIDDEN ClipArt Windows-->
+        <!-- <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView1" Center="-100,360" Orientation="90">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList1" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView2" Center="-100,720" Orientation="90">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList2" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView3" Center="2020,360" Orientation="270">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList3" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView4" Center="2020,720" Orientation="270">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList4" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="20" BorderBrush="White" x:Name="ClipArtListView5" Center="480,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList5" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="20" BorderBrush="White" x:Name="ClipArtListView6" Center="960,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList6" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="20" BorderBrush="White" x:Name="ClipArtListView7" Center="1440,-100" Orientation="180">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList7" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView8" Center="480,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList8" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView9" Center="960,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList9" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>
+
+        <s:ScatterViewItem Height="300" Width="500" Background="Transparent" BorderThickness="10" BorderBrush="White" x:Name="ClipArtListView10" Center="1440,1180" Orientation="0">
+            <StackPanel>
+                <Label Content="ClipArt" Background="Green" VerticalAlignment="Top" HorizontalAlignment="Left" Width="500" Margin="8"/>
+                <s:LibraryBar   Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList10" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                </s:LibraryBar>
+            </StackPanel>
+        </s:ScatterViewItem>-->
+
+        <!-- CJT End of 10 ClipArt windows for hiding -->
+    </s:ScatterView>
+
+
+        <!-- YKL Added for Sidebar. begin-->
+
+        
+        <s:ScatterView Grid.Row="0" Grid.Column="1" >
+        <s:ScatterViewItem x:Name="Sidebar1"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 0" Orientation="180">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar1">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons1"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar1">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons1"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel>
+                <Grid x:Name="SidebarButtons1" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="0" Y="200" />
+                    </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList1" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                        </s:LibraryBar>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </s:ScatterViewItem>
+        </s:ScatterView>
+
+        <s:ScatterView Grid.Row="0" Grid.Column="3" >
+            <s:ScatterViewItem x:Name="Sidebar2"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 0" Orientation="180">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar2">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons2"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar2">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons2"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel Orientation="Vertical">
+                <Grid x:Name="SidebarButtons2" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="0" Y="200" />
+                    </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList2" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                        </s:LibraryBar>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </s:ScatterViewItem>
+        </s:ScatterView>
+
+        <s:ScatterView Grid.Row="2" Grid.Column="1" >
+            <s:ScatterViewItem x:Name="Sidebar3"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 200" Orientation="0"
+                           Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar3">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons3"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar3">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons3"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel>
+                <Grid x:Name="SidebarButtons3" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="0" Y="200" />
+                    </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList3" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                        </s:LibraryBar>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </s:ScatterViewItem>
+        </s:ScatterView>
+
+        <s:ScatterView Grid.Row="2" Grid.Column="3" >
+            <s:ScatterViewItem x:Name="Sidebar4"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="330 200" Orientation="0">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar4">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons4"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar4">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons4"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel>
+                <Grid x:Name="SidebarButtons4" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="0" Y="200" />
+                    </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList4" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                        </s:LibraryBar>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </s:ScatterViewItem>
+        </s:ScatterView>
+
+        <s:ScatterView Grid.Column="0" Grid.Row="1" AllowDrop="True">
+            <s:ScatterViewItem x:Name="Sidebar5"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"  AllowDrop="True"
+                            Height="400" Width="660" Center="0 340" Orientation="90" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar5">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons5"
+                                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar5">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons5"
+                                        Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel >
+                    <Grid x:Name="SidebarButtons5" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                        <Grid.RenderTransform>
+                            <TranslateTransform X="0" Y="200" />
+                        </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" >
+                            <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList5" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                            </s:LibraryBar>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </s:ScatterViewItem>
+        </s:ScatterView>
+
+        <s:ScatterView Grid.Column="4" Grid.Row="1"  AllowDrop="True">
+        <s:ScatterViewItem x:Name="Sidebar6"  Background="{StaticResource button_whitearrow}" CanRotate="False" CanScale="False" CanMove="False"
+                            Height="400" Width="660" Center="200 340 " Orientation="270"  AllowDrop="True"
+                           s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterViewItem.Triggers>
+                <EventTrigger RoutedEvent="TouchEnter" SourceName="Sidebar6">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:00" Duration="00:00:00.05" To="0" Storyboard.TargetName="SidebarButtons6"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="TouchLeave" SourceName="Sidebar6">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation BeginTime="00:00:02" Duration="00:00:01" To="200" Storyboard.TargetName="SidebarButtons6"
+                                            Storyboard.TargetProperty="RenderTransform.(TranslateTransform.Y)" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </s:ScatterViewItem.Triggers>
+            <StackPanel>
+                <Grid x:Name="SidebarButtons6" Canvas.ZIndex="0" Background="Gray" Height="200" Width="700">
+                    <Grid.RenderTransform>
+                        <TranslateTransform X="0" Y="200" />
+                    </Grid.RenderTransform>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <s:LibraryBar Rows="1" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" x:Name="ClipArtList6" ItemTemplate="{StaticResource ContainerItemTemplate}">
+                        </s:LibraryBar>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </s:ScatterViewItem>
+        </s:ScatterView>
+        <!-- YKL Added for Sidebar. end-->
+
+    </Grid>
+</s:SurfaceWindow>
