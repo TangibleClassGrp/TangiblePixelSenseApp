@@ -135,6 +135,7 @@ public SurfaceWindow1()
             SurfaceButton mybtn2 = new SurfaceButton();
             mybtn2.Content = "Clear Screen";
             // mybtn2.Command = clearScreen;
+            
             MainLibraryBar.Items.Add(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\clearscreen.png");
             scatterView.ContextMenu.Items.Add(mybtn2);
 
@@ -316,6 +317,7 @@ public SurfaceWindow1()
                 casvi.CanScale = true;
                 casvi.Name = "DraggedClipArt" + curIndex;
                 casvi.Center = e.Cursor.GetPosition(scatterView);
+                
                 //casvi.AddHandler(
                  //   SurfaceDragDrop.AddDragCompletedHandler(casvi , scatterView_DragLeave);
                 
@@ -539,7 +541,7 @@ public SurfaceWindow1()
             return tapsAreCloseInDistance && tapsAreCloseInTime;
         }
 
-        private void scatterView_DragLeave(object sender, TargetChangedEventArgs e)
+        private void scatterView_DragLeave(object sender, SurfaceDragDropEventArgs e)
         {
     
             // If the operation is Move, remove the data from drag source.
@@ -599,6 +601,32 @@ public SurfaceWindow1()
                 clearScreen();
             }
         }
+
+        private void scatterView_ContainerActivated(object sender, RoutedEventArgs e)
+        {
+            for (var i = 0; i < curClipArt.Count; i++)
+            {
+                if (checkBounds(curClipArt[i].ActualCenter))
+                {
+                    scatterView.Items.Remove(curClipArt[i]);
+                    curClipArt.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        private bool checkBounds(System.Windows.Point p)
+        {
+            if (p.X >= 1800 || p.Y >= (1080-120) || p.X <= 120 || p.Y <= 120)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
 
 
         

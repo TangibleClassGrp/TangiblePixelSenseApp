@@ -45,19 +45,19 @@
 
         <!-- YKL Added for Sidebar. begin-->
 
-        <s:ScatterView Grid.Row="0" Grid.Column="0" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterView Grid.Row="0" Grid.Column="0" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
         </s:ScatterView>
 
         <s:ScatterView Grid.Row="0" Grid.Column="2" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
         </s:ScatterView>
 
-        <s:ScatterView Grid.Row="0" Grid.Column="4" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterView Grid.Row="0" Grid.Column="4" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
         </s:ScatterView>
 
-        <s:ScatterView Grid.Row="2" Grid.Column="0" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterView Grid.Row="2" Grid.Column="0" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
         </s:ScatterView>
 
-        <s:ScatterView Grid.Row="2" Grid.Column="2" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
+            <s:ScatterView Grid.Row="2" Grid.Column="2" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
         </s:ScatterView>
 
         <s:ScatterView Grid.Row="2" Grid.Column="4" Background="Black" s:SurfaceDragDrop.Drop="ClipArtListView_Drop">
@@ -282,7 +282,7 @@
     </Grid>
 
         <s:ScatterView TouchDown="scatterView_TouchDown" s:TouchExtensions.PreviewTapGesture="ScatterView_PreviewTapGesture" s:TouchExtensions.HoldGesture="scatterView_HoldGesture"
-         Width="1920" Height="1080"
+         Width="1920" Height="1080" s:ScatterViewItem.ContainerActivated="scatterView_ContainerActivated"
         x:Name="scatterView" Background="{StaticResource BkgrdBrush}" AllowDrop="True" s:SurfaceDragDrop.Drop="scatterView_Drop" ContextMenu="{StaticResource openMenu}">
             <s:ScatterViewItem AllowDrop="False" TouchDown="Menu_TouchDown" s:TouchExtensions.HoldGesture="Menu_HoldGesture" x:Name="Menu" Background="Transparent" Height="300" Width="500" BorderThickness="10" BorderBrush="Transparent" CanMove="True" CanRotate="True" CanScale="False">
                 <s:SurfaceListBox AllowDrop="False" x:Name="BGMenu" Width="500" Height="500" Background="Transparent">
