@@ -10,7 +10,7 @@
             <Image Source="{Binding}" Width="60" Height="60" MaxWidth="120" />
         </DataTemplate>
         <DataTemplate x:Key="MenuContainerItemTemplate">
-            <Image Source="{Binding}" MaxWidth="200"/>
+            <Image Source="{Binding}" Width="200" MaxWidth="200"/>
         </DataTemplate>
         <!-- CJT Added for the Context Menu -->
         <DataTemplate x:Key="MenuItemTemplate">
@@ -18,8 +18,8 @@
             </s:SurfaceButton>
         </DataTemplate>
         <!-- CJT Added for the table's background image-->
-        <ImageBrush x:Key="BkgrdBrush" Stretch="Fill" ImageSource="..\..\Resources\Images\Backgrounds\blue-deep-ocean-water.png" />
-        <ImageBrush x:Key="button_whitearrow"  Stretch="Fill" ImageSource="Resources/whitearrow.png"/>
+        <ImageBrush x:Key="BkgrdBrush" Stretch="Fill" ImageSource="Resources/Images/Backgrounds/blue-deep-ocean-water.png" />
+        <ImageBrush x:Key="button_whitearrow" AlignmentY="Top" Stretch="None" ImageSource="Resources/Images/button.png"/>
         <!-- <ImageBrush x:Key="button_circle"  Stretch="Fill" ImageSource="Resources/button.png"/> -->
         <!-- CJT Added so have a context menu on the scatterview -->
         <ContextMenu x:Key="openMenu" Background="Black" BorderBrush="Transparent" BorderThickness="0" HasDropShadow="True" ItemTemplate="{StaticResource MenuItemTemplate}" x:Name="BkgrdMenu" />

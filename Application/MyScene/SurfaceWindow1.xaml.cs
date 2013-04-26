@@ -574,6 +574,32 @@ public SurfaceWindow1()
 
         }
 
+        private void BGMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // find the path information for the chosen object
+            SurfaceButton findSourceA = (SurfaceButton)sender;
+            SurfaceButton findSourceB = (SurfaceButton)findSourceA.Content;
+
+            if (findSourceB.Content is Image)
+            { // is a background image
+                Image myimg = (Image)((SurfaceButton)findSourceA.Content).Content;
+
+                string ImagePath = myimg.Source.ToString();
+                // create new image object for the dragged object
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = new BitmapImage(new Uri(ImagePath, UriKind.RelativeOrAbsolute));
+                img.Stretch = System.Windows.Media.Stretch.Fill;
+                // overwrite the Main Window with this new image
+                scatterView.Items.Remove(scatterView.Background);
+                scatterView.Background = img;
+                // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
+            }
+            else // is the clear screen item
+            {
+                clearScreen();
+            }
+        }
+
 
         
         

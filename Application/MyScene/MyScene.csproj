@@ -94,6 +94,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Images\button.png" />
     <Resource Include="Resources\icon.png" />
     <Resource Include="Resources\Images\Backgrounds\scene01.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
