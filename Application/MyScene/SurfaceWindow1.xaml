@@ -261,7 +261,7 @@
 
     </Grid>
         <s:ScatterView TouchDown="scatterView_TouchDown" s:TouchExtensions.HoldGesture="scatterView_HoldGesture"
-         Width="1920" Height="1080" 
+         Width="1920" Height="1080" Visibility="Hidden"
         x:Name="scatterView" Background="{StaticResource BkgrdBrush}" AllowDrop="True" s:SurfaceDragDrop.Drop="scatterView_Drop" ContextMenu="{StaticResource openMenu}">
             <s:ScatterViewItem TouchDown="Menu_TouchDown" s:TouchExtensions.HoldGesture="Menu_HoldGesture" x:Name="Menu" Background="Transparent" Height="300" Width="500" BorderThickness="10" BorderBrush="Transparent" CanMove="True" CanRotate="True" CanScale="False">
                 <s:SurfaceListBox x:Name="BGMenu" Width="500" Height="500" Background="Transparent">
