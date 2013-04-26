@@ -130,7 +130,11 @@ public SurfaceWindow1()
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
 
-           
+            SurfaceButton mybtn2 = new SurfaceButton();
+            mybtn2.Content = "Clear Screen";
+            // mybtn2.Command = clearScreen;
+            MainLibraryBar.Items.Add(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\clearscreen.png");
+            scatterView.ContextMenu.Items.Add(mybtn2);
 
             // CJT Add all Background Images to the default Background Selection Box
             //var mystring = MyScene.App.Current.Resources.ToString();
@@ -158,11 +162,7 @@ public SurfaceWindow1()
                  // BackgroundList.Items.Add(BackgroundFileNames[i]);
               }
               
-              SurfaceButton mybtn2 = new SurfaceButton();
-              mybtn2.Content = "Clear Screen";
-             // mybtn2.Command = clearScreen;
-              MainLibraryBar.Items.Add(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\clearscreen.png");
-              scatterView.ContextMenu.Items.Add(mybtn2);
+           
             
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
             string[] curDir = Directory.GetDirectories(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\ClipArt\");
@@ -275,13 +275,13 @@ public SurfaceWindow1()
                 scatterView.Items.Remove(scatterView.Background);
                 scatterView.Background = img;
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
-                BGMenu.Visibility = Visibility.Hidden;
+                //BGMenu.Visibility = Visibility.Hidden;
                 // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
             else if (ImagePath.IndexOf("clearscreen") > 0)
             {
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
-                BGMenu.Visibility = Visibility.Hidden;
+                //BGMenu.Visibility = Visibility.Hidden;
                 clearScreen();
 
             } 
@@ -408,7 +408,7 @@ public SurfaceWindow1()
         private void ClipArtListView_Drop(object sender, SurfaceDragDropEventArgs e)
         {
             // find the path information for the dragged object
-            FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
+        /*    FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
             ScatterViewItem draggedElement = null;
             while (draggedElement == null && findSource != null)
             {
@@ -425,7 +425,7 @@ public SurfaceWindow1()
 
             //string ImagePath = draggedElement.Source.ToString();
             scatterView.Items.Remove(draggedElement); // remove from screen
-            curClipArt.Remove(draggedElement); // remove from list
+            curClipArt.Remove(draggedElement); // remove from list*/
         }
 
         private void c_previewTouchDown(object sender, SurfaceDragDropEventArgs e)

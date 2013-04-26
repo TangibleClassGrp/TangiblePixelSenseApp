@@ -125,7 +125,6 @@
     <Resource Include="Resources\Images\ClipArt\ballFootball.png" />
     <Resource Include="Resources\Images\ClipArt\ballGolfball.png" />
     <Resource Include="Resources\Images\ClipArt\ballSoccerBall.png" />
-    <Resource Include="Resources\Images\ClipArt\ballTennis.png" />
     <Resource Include="Resources\Images\ClipArt\ballVolleyball.png" />
     <Resource Include="Resources\Images\ClipArt\binoculars.png" />
     <Resource Include="Resources\Images\ClipArt\bookStack.png" />
