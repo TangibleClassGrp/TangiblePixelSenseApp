@@ -288,7 +288,9 @@
                 <s:SurfaceListBox AllowDrop="False" x:Name="BGMenu" Width="500" Height="500" Background="Transparent">
 
                     <StackPanel AllowDrop="False" >
-                        
+                        <Grid Background="Gray">
+                            <Label Content="Drag pictures to change backgrounds"></Label>
+                        </Grid>                        
                         <s:LibraryBar AllowDrop="False" x:Name="MainLibraryBar" Background="Transparent" VerticalAlignment="Bottom" HorizontalAlignment="Center" ItemTemplate="{StaticResource MenuContainerItemTemplate}">
                         </s:LibraryBar>
                     </StackPanel>
