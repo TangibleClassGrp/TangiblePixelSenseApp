@@ -157,6 +157,7 @@
     </Resource>
     <Content Include="MyScene.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Resource Include="Resources\whitearrow.png" />
   </ItemGroup>
