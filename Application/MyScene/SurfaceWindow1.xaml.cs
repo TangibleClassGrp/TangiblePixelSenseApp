@@ -19,6 +19,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+
 
 namespace MyScene
 {
@@ -130,7 +132,11 @@ public SurfaceWindow1()
             // Add handlers for window availability events
             AddWindowAvailabilityHandlers();
 
-           
+            SurfaceButton mybtn2 = new SurfaceButton();
+            mybtn2.Content = "Clear Screen";
+            // mybtn2.Command = clearScreen;
+            MainLibraryBar.Items.Add(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\clearscreen.png");
+            scatterView.ContextMenu.Items.Add(mybtn2);
 
             // CJT Add all Background Images to the default Background Selection Box
             //var mystring = MyScene.App.Current.Resources.ToString();
@@ -158,11 +164,7 @@ public SurfaceWindow1()
                  // BackgroundList.Items.Add(BackgroundFileNames[i]);
               }
               
-              SurfaceButton mybtn2 = new SurfaceButton();
-              mybtn2.Content = "Clear Screen";
-             // mybtn2.Command = clearScreen;
-              MainLibraryBar.Items.Add(Directory.GetCurrentDirectory()+@"\..\..\Resources\Images\clearscreen.png");
-              scatterView.ContextMenu.Items.Add(mybtn2);
+           
             
             // CJT Add all the ClipArt Images to the default ClipArt Selection Box
             string[] curDir = Directory.GetDirectories(Directory.GetCurrentDirectory() + @"\..\..\Resources\Images\ClipArt\");
@@ -193,7 +195,8 @@ public SurfaceWindow1()
             }*/
             // above not needed since adding as resources took care of moving all the files out of the main directory and now makes everything a dupe
 
-
+            BGMenu.Visibility = Visibility.Hidden;
+            Menu.Center = new Point(-500, -500);
 
         }
 
@@ -276,12 +279,14 @@ public SurfaceWindow1()
                 scatterView.Background = img;
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
                 BGMenu.Visibility = Visibility.Hidden;
+                Menu.Center = new Point(-500, -500);
                 // do with LibraryBar.SetIsItemDataEnabled(whichitem, true); -- see http://social.msdn.microsoft.com/Forums/en-US/surfaceappdevelopment/thread/8d341171-8ae9-4ccc-8e5c-84a3aa8a4d29/
             }
             else if (ImagePath.IndexOf("clearscreen") > 0)
             {
                 MainLibraryBar.SetIsItemDataEnabled(e.Cursor.Data, true);
                 BGMenu.Visibility = Visibility.Hidden;
+                Menu.Center = new Point(-500, -500);
                 clearScreen();
 
             } 
@@ -311,6 +316,9 @@ public SurfaceWindow1()
                 casvi.CanScale = true;
                 casvi.Name = "DraggedClipArt" + curIndex;
                 casvi.Center = e.Cursor.GetPosition(scatterView);
+                //casvi.AddHandler(
+                 //   SurfaceDragDrop.AddDragCompletedHandler(casvi , scatterView_DragLeave);
+                
                 //casvi.Orientation = e.Cursor.GetOrientation(ClipArtList); // need to find which window dragged this object
 
 
@@ -329,6 +337,8 @@ public SurfaceWindow1()
             //BackgroundList.SetIsItemDataEnabled(e.Cursor.Data, true);
             //ClipArtList.SetIsItemDataEnabled(e.Cursor.Data, true); // need to do for all current clipart bars that are open OR look for which one dragged it here
         }
+
+
 
         /// <summary>
         /// Adds handlers for window availability events.
@@ -408,7 +418,7 @@ public SurfaceWindow1()
         private void ClipArtListView_Drop(object sender, SurfaceDragDropEventArgs e)
         {
             // find the path information for the dragged object
-            FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
+        /*    FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
             ScatterViewItem draggedElement = null;
             while (draggedElement == null && findSource != null)
             {
@@ -425,7 +435,7 @@ public SurfaceWindow1()
 
             //string ImagePath = draggedElement.Source.ToString();
             scatterView.Items.Remove(draggedElement); // remove from screen
-            curClipArt.Remove(draggedElement); // remove from list
+            curClipArt.Remove(draggedElement); // remove from list*/
         }
 
         private void c_previewTouchDown(object sender, SurfaceDragDropEventArgs e)
@@ -470,16 +480,20 @@ public SurfaceWindow1()
         //GLC - Implemented the hold gesture for showing and hiding the menu to change backgrounds.
         private void scatterView_HoldGesture(object sender, TouchEventArgs e)
         {
-            if (BGMenu.Visibility == Visibility.Visible)
+            if (doIt)
             {
-                //The menu is already up. Hide it.
-                BGMenu.Visibility = Visibility.Hidden;
-                Menu.Center = new Point(-500, -500);
-            }
-            else //Show the menu
-            {
-                BGMenu.Visibility = Visibility.Visible;
-                Menu.Center = new Point(960, 540);
+                if (BGMenu.Visibility == Visibility.Visible)
+                {
+                    //The menu is already up. Hide it.
+                    BGMenu.Visibility = Visibility.Hidden;
+                    Menu.Center = new Point(-500, -500);
+                }
+                else //Show the menu
+                {
+                    BGMenu.Visibility = Visibility.Visible;
+                    Menu.Center = new Point(960, 540);
+                }
+                doIt = false;
             }
 
             //Mouse Prototyping - no longer used.
@@ -499,6 +513,69 @@ public SurfaceWindow1()
                 //Do nothing
             }
         }
+
+        private void ScatterView_PreviewTapGesture(object sender, TouchEventArgs e)
+        {
+
+            if (IsDoubleTap(e))
+                doIt = true;
+            scatterView_HoldGesture(sender, e);
+        }
+
+        private readonly Stopwatch _doubleTapStopwatch = new Stopwatch();
+        private Point _lastTapLocation;
+        private bool doIt = false;
+
+        private bool IsDoubleTap(TouchEventArgs e)
+        {
+            Point currentTapPosition = e.GetTouchPoint(this).Position;
+            bool tapsAreCloseInDistance = System.Windows.Point.Subtract(currentTapPosition, _lastTapLocation).Length < 40;
+            _lastTapLocation = currentTapPosition;
+
+            TimeSpan elapsed = _doubleTapStopwatch.Elapsed;
+            _doubleTapStopwatch.Restart();
+            bool tapsAreCloseInTime = (elapsed != TimeSpan.Zero && elapsed < TimeSpan.FromSeconds(0.7));
+
+            return tapsAreCloseInDistance && tapsAreCloseInTime;
+        }
+
+        private void scatterView_DragLeave(object sender, TargetChangedEventArgs e)
+        {
+    
+            // If the operation is Move, remove the data from drag source.
+            if ( (e.Cursor.GetPosition(scatterView).X >= 1900 || e.Cursor.GetPosition(scatterView).X <= 100 || e.Cursor.GetPosition(scatterView).Y >=895 || e.Cursor.GetPosition(scatterView).Y <=100))
+            {
+                FrameworkElement findSource = (e.Cursor.Visual) as FrameworkElement;
+                ScatterViewItem draggedElement = null;
+                while (draggedElement == null && findSource != null)
+                {
+                    if ((draggedElement = findSource as ScatterViewItem) == null)
+                    {
+                        findSource = VisualTreeHelper.GetChild(findSource, 0) as FrameworkElement;
+                    }
+                }
+
+                if (draggedElement == null)
+                {
+                    return;
+                }
+
+                //string ImagePath = draggedElement.Source.ToString();
+                scatterView.Items.Remove(draggedElement); // remove from screen
+                curClipArt.Remove(draggedElement);
+                
+            }
+
+
+        }
+
+        private void scatterView_TargetChanged(object sender, TargetChangedEventArgs e)
+        {
+
+        }
+
+
+        
         
     }
 }
