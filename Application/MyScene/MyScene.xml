@@ -6,6 +6,7 @@ instructions.
 -->
 <ss:ApplicationInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ss="http://schemas.microsoft.com/Surface/2007/ApplicationMetadata">
   <Application>
+<<<<<<< HEAD
       <Title>Dream-A-Scene</Title>
       <Description>Create a world of your own.</Description>
       <ExecutableFile>MyScene.exe</ExecutableFile>
@@ -14,6 +15,14 @@ instructions.
       <Preview>
         <PreviewImageFile>Resources\Images\Icons\SurfacePreviewImage.png</PreviewImageFile>
       </Preview>
+=======
+    <Title>Dream-A-Scene</Title>
+    <Description>Dream-A-Scene</Description>
+    <ExecutableFile>MyScene.exe</ExecutableFile>
+    <Arguments>
+    </Arguments>
+    <IconImageFile>Resources\icon.png</IconImageFile>
+>>>>>>> 38580ffdc2cfa0dbded6e85aae9a4acaa94b0e05
     <Tags>
       <!--
       If your application uses tagged objects, please uncomment this section to register the tags with the Shell. 
